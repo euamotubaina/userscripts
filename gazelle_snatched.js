@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            Gazelle Snatched
-// @namespace       Gazelle
+// @namespace       https://github.com/euamotubaina
 // @description     Mark snatched torrents across your favorite gazelle music trackers.
 // @author          Mordred
 // @match           https://*redacted.ch/*
