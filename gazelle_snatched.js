@@ -12,7 +12,7 @@
 // @grant           GM_getResourceText
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
-// @version         2024-07-16
+// @version         2024-07-16_2
 // ==/UserScript==
 
 var snatched_groups = {};
