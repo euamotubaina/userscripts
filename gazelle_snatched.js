@@ -10,8 +10,8 @@
 // @grant           GM_xmlhttpRequest
 // @grant           GM_registerMenuCommand
 // @grant           GM_getResourceText
-// @downloadURL     https://raw.githubusercontent.com/euamotubaina/gazelle_snatched/main/gazelle_snatched.js
-// @updateURL       https://raw.githubusercontent.com/euamotubaina/gazelle_snatched/main/gazelle_snatched.js
+// @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
+// @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
 // @version         2.4.2
 // @date            2024-07-15
 // ==/UserScript==
