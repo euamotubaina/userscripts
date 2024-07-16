@@ -1073,7 +1073,7 @@ var snatched_groups = {};
 						(!torrent_id || !$(this).parent().parent().is('.group_torrent')) && !$(this).is('.post_id')) {
 					$(this).addClass('gazelle_bookmark');
 				}
-				if (torrent_id && d.torrents[torrent_id]) {
+				if ($(this).text() !== 'PL' && torrent_id && d.torrents[torrent_id]) {
 					if (d.torrents[torrent_id].ty == 'snatched')
 						$(this).addClass('gazelle_snatched');	// we can't use .snatched anymore because what has now added it's own .snatched class
 					else if (d.torrents[torrent_id].ty == 'uploaded')
