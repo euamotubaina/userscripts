@@ -1114,7 +1114,7 @@ var snatched_groups = {};
 					$(this).find('td:first span:first a').each(function(i) {
 						var href = $(this).attr('href');
 						if (href) {
-							var m = href.match(/torrents\.php\?.+&?torrentid=(\d+)/);
+							var m = href.match(/torrents\.php\?.*?torrentid=(\d+)/);
 							if (m) {
 								// the permalink automatically gets the style applied to it, so we need to remove it here and then manually add it to the text below
 								torrent_id = m[1];
