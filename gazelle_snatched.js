@@ -3,7 +3,7 @@
 // @namespace       https://github.com/euamotubaina
 // @description     Mark snatched torrents across your favorite gazelle music trackers.
 // @author          Mordred
-// @match           https://*redacted.ch/*
+// @match           https://*redacted.sh/*
 // @match           https://*orpheus.network/*
 // @match           https://*notwhat.cd/*
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js
@@ -12,7 +12,7 @@
 // @grant           GM_getResourceText
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle_snatched.js
-// @version         2024-07-16_2
+// @version         2024-11-27
 // ==/UserScript==
 
 var snatched_groups = {};
@@ -107,7 +107,7 @@ var snatched_groups = {};
 			window.localStorage.setItem(key, value);
 		} catch (e) {
 			console.error("Gazelle Snatched Error: Could not update torrent list. You will most likely need to update your maximum localStorage size. \
-				Check the main support thread for details on doing this. https://redacted.ch/forums.php?action=viewthread&threadid=4082&page=4#post279935");
+				Check the main support thread for details on doing this. https://redacted.sh/forums.php?action=viewthread&threadid=4082&page=4#post279935");
 		}
 		// if (!chromeExtension) {
 		// 	GM_setValue(key, value);
@@ -211,7 +211,7 @@ var snatched_groups = {};
 	var domain_prefix = 'gazelle_';
 	var domain_abbr = 'g';
 	switch (location.hostname) {
-		case 'redacted.ch':
+		case 'redacted.sh':
 			domain_prefix = 'redacted_';
 			domain_abbr = 'r';
 			break;
