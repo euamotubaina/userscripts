@@ -8,7 +8,7 @@
 // @include      http*://*orpheus.network/*
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @namespace    https://greasyfork.org/users/87476
+// @namespace    https://github.com/euamotubaina
 // @downloadURL  https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats_since_last.js
 // @updateURL    https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats_since_last.js
 // ==/UserScript==
