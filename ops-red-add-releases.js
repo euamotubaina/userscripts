@@ -706,4 +706,4 @@
 
     createSettingsMenu();
 
-  })();
+})();
