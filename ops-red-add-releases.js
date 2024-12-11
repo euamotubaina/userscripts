@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         OPS/RED - add releases
-// @namespace    https://github.com/Audionut/add-trackers
-// @version      1.2.1-1
+// @namespace    https://github.com/euamotubaina
+// @version      1.2.1-3
 // @description  Add releases to/from RED/OPS
 // @author       Audionut
 // @match        https://orpheus.network/torrents.php?id=*
@@ -30,37 +30,37 @@
           label: "OPS API Key",
           type: "text",
           default: GM_getValue("OPS_API_KEY", ""),
-          tooltip: "Enter your OPS API Key",
+          title: "Enter your OPS API Key",
         },
         RED_API_KEY: {
           label: "RED API Key",
           type: "text",
           default: GM_getValue("RED_API_KEY", ""),
-          tooltip: "Enter your RED API Key",
+          title: "Enter your RED API Key",
         },
         High_Lighting: {
           label: "Add highlighting to the added rows",
           type: "checkbox",
           default: GM_getValue("High_Lighting", false),
-          tooltip: "Add or not",
+          title: "Add or not",
         },
         sizeMatching: {
           label: "Size Tolerance (in MiB)",
           type: "number",
           default: GM_getValue("sizeMatching", 0),
-          tooltip: "Allowed difference in size for matching (in MiB)",
+          title: "Allowed difference in size for matching (in MiB)",
         },
         CACHE_EXPIRY_TIME: {
           label: "Cache Expiry Time (in days)",
           type: "number",
           default: GM_getValue("CACHE_EXPIRY_TIME", 7), // default 7 days
-          tooltip: "Cache expiry time in days",
+          title: "Cache expiry time in days",
         },
         showFileCount: {
           label: "Show file count",
           type: "checkbox",
           default: GM_getValue("showFileCount", true),
-          tooltip: "Show file count column. Default: true",
+          title: "Show file count column. Default: true",
         },
       };
 
@@ -645,15 +645,15 @@
                   ${
                     !isOPS && isArtistPage
                       ? `&nbsp;&nbsp;${siteIcon} <a href="${torrentLink}" target="_blank">${details} ${leechLabel}</a>`
-                      : `<a href="${torrentLink}" target="_blank" style="background: none; padding: 0">${siteIcon} [${details}] ${leechLabel}</a>`
+                      : `<a href="${torrentLink}" target="_blank" style="background: none; padding: 0">${siteIcon} ${isOPS ? '[' : ''}${details}${isOPS ? ']' : ''} ${leechLabel}`
                   }
+                  ${!isOPS ? " / " : ""}<strong class="torrent_label tooltip tl_notice">${siteName}</strong></a>
                   <span class="torrent_links_block" style="float: right;">
                       ${isArtistPage && !isOPS ? "" : "[ "}
                       ${isOPS || (!isOPS && !isArtistPage) ? `${siteDlLink}` : siteDlLink}
                       ${!isOPS && isArtistPage ? "" : ` | <a class="tooltip" href=${torrentLink} target="_blank" style="background: none; padding: 0">PL</a>`}
                       ${isArtistPage && !isOPS ? "" : " ]"}
                   </span>
-                  <strong class="torrent_label tooltip tl_notice" style="padding-left: 2px">${siteName}</strong>
               </td>
               <td class="number_column td_filecount nobr ${showFileCount && !isArtistPage ? "" : "hidden"}">${torrent.fileCount}</td>
               <td class="number_column td_size nobr" style="${darkLines}">${sizeDisplay}</td>
