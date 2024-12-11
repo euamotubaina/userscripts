@@ -2,7 +2,7 @@
 // @name            Gazelle File Count
 // @namespace       https://github.com/euamotubaina
 // @description     Shows the number of tracks and/or files in each torrent
-// @version         2.0.3-03
+// @version         2.0.3-04
 // @match           https://notwhat.cd/torrents.php*id=*
 // @match           https://orpheus.network/torrents.php*id=*
 // @match           https://redacted.sh/torrents.php*id=*
@@ -27,15 +27,13 @@
                 label: "Display",
                 type: "number",
                 default: GM_getValue("display", 1),
-                title: `
-                    How to display the file count:
+                title: `How to display the file count:
 
-                    1 = Total number of files in torrent (15)
-                    2 = Number of tracks out of total files (12/15)
-                    3 = Number of tracks plus extra files (12+3)
-                    4 = Only the number of tracks (12)
-                    `,
-                },
+1 = Total number of files in torrent (15)
+2 = Number of tracks out of total files (12/15)
+3 = Number of tracks plus extra files (12+3)
+4 = Only the number of tracks (12)`,
+            },
             checkEditions: {
                 label: "Highlight track count conflicts",
                 type: "checkbox",
