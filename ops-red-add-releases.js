@@ -1,24 +1,24 @@
 // ==UserScript==
-// @name         OPS/RED - add releases
-// @namespace    https://github.com/euamotubaina
-// @version      1.2.1-3
-// @description  Add releases to/from RED/OPS
-// @author       Audionut
-// @match        https://orpheus.network/torrents.php?id=*
-// @match        https://orpheus.network/artist.php?id=*
-// @match        https://redacted.sh/torrents.php?id=*
-// @match        https://redacted.sh/artist.php?id=*
-// @grant        GM_xmlhttpRequest
-// @grant        GM_addStyle
-// @grant        GM_getValue
-// @grant        GM_setValue
-// @grant        GM_registerMenuCommand
-// @grant        GM_deleteValue
-// @grant        GM_listValues
-// @require      https://cdn.jsdelivr.net/gh/sizzlemctwizzle/GM_config@43fd0fe4de1166f343883511e53546e87840aeaf/gm_config.js
-// @require      https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js
-// @downloadURL  https://raw.githubusercontent.com/euamotubaina/userscripts/refs/heads/main/ops-red-add-releases.js
-// @updateURL    https://raw.githubusercontent.com/euamotubaina/userscripts/refs/heads/main/ops-red-add-releases.js
+// @name            OPS/RED - add releases
+// @namespace       https://github.com/euamotubaina
+// @version         1.2.1-03
+// @description     Add releases to/from RED/OPS
+// @author          Audionut
+// @match           https://orpheus.network/torrents.php?id=*
+// @match           https://orpheus.network/artist.php?id=*
+// @match           https://redacted.sh/torrents.php?id=*
+// @match           https://redacted.sh/artist.php?id=*
+// @grant           GM_xmlhttpRequest
+// @grant           GM_addStyle
+// @grant           GM_getValue
+// @grant           GM_setValue
+// @grant           GM_registerMenuCommand
+// @grant           GM_deleteValue
+// @grant           GM_listValues
+// @require         https://cdn.jsdelivr.net/gh/sizzlemctwizzle/GM_config@43fd0fe4de1166f343883511e53546e87840aeaf/gm_config.js
+// @require         https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js
+// @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/refs/heads/main/ops-red-add-releases.js
+// @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/refs/heads/main/ops-red-add-releases.js
 // ==/UserScript==
 
 (function() {

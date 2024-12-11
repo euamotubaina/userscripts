@@ -1,15 +1,15 @@
 // ==UserScript==
-// @name        Orpheus: CSS Hacks
-// @description Collages below torrents, adds .tl_notice
-// @author      commoner@orpheus.network
-// @namespace   https://github.com/euamotubaina
-// @version     2024-12-11
-// @grant       none
-// @match       https://orpheus.network/torrents.php?id=*
-// @match       https://orpheus.network/artist.php?id=*
-// @icon        https://orpheus.network/favicon.ico
-// @downloadURL https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops_csshacks.js
-// @updateURL   https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops_csshacks.js
+// @name            Orpheus: CSS Hacks
+// @description     Collages below torrents, adds .tl_notice
+// @author          commoner@orpheus.network
+// @namespace       https://github.com/euamotubaina
+// @version         2024-12-11-01
+// @grant           none
+// @match           https://orpheus.network/torrents.php?id=*
+// @match           https://orpheus.network/artist.php?id=*
+// @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-csshacks.js
+// @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-csshacks.js
+// @icon            https://orpheus.network/favicon.ico
 // ==/UserScript==
 
 

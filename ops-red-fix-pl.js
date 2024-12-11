@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name        OPS/RED: Fix PL
-// @namespace   https://github.com/euamotubaina
-// @version     2024-12-11-1
-// @description Fix PL links
-// @author      euamotubaina
-// @grant       none
-// @match       https://orpheus.network/torrents.php?id=*
-// @match       https://orpheus.network/artist.php?id=*
-// @match       https://redacted.sh/torrents.php?id=*
-// @match       https://redacted.sh/artist.php?id=*
-// @downloadURL https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
-// @updateURL   https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
+// @name            OPS/RED: Fix PL
+// @namespace       https://github.com/euamotubaina
+// @version         2024-12-11-02
+// @description     Fix PL links
+// @author          euamotubaina
+// @grant           none
+// @match           https://orpheus.network/torrents.php?id=*
+// @match           https://orpheus.network/artist.php?id=*
+// @match           https://redacted.sh/torrents.php?id=*
+// @match           https://redacted.sh/artist.php?id=*
+// @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
+// @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
 // ==/UserScript==
 
 (() => {

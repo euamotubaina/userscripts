@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name         Stats since last
-// @version      1.4.1-01
-// @description  Displays the changes in stats on RED, PTP, OPS
-// @author       Chameleon
-// @include      http*://*redacted.sh/*
-// @include      http*://*passthepopcorn.me/*
-// @include      http*://*orpheus.network/*
-// @grant        GM_getValue
-// @grant        GM_setValue
-// @namespace    https://github.com/euamotubaina
-// @downloadURL  https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats_since_last.js
-// @updateURL    https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats_since_last.js
+// @name          Stats since last
+// @version       1.4.1-03
+// @description   Displays the changes in stats on RED, PTP, OPS
+// @author        Chameleon
+// @include       http*://*redacted.sh/*
+// @include       http*://*passthepopcorn.me/*
+// @include       http*://*orpheus.network/*
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @namespace     https://github.com/euamotubaina
+// @downloadURL   https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats-since-last.js
+// @updateURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/stats-since-last.js
 // ==/UserScript==
 
 (function() {
