@@ -2,7 +2,7 @@
 // @name            Gazelle File Count
 // @namespace       https://github.com/euamotubaina
 // @description     Shows the number of tracks and/or files in each torrent
-// @version         2.0.3-02
+// @version         2.0.3-03
 // @match           https://notwhat.cd/torrents.php*id=*
 // @match           https://orpheus.network/torrents.php*id=*
 // @match           https://redacted.sh/torrents.php*id=*
@@ -231,7 +231,7 @@
 
         table.addEventListener('click', function (e) {
 
-            function get(type) {
+            function get(type, id) {
                 return document.getElementById([type, id].join('_'));
             }
 
@@ -239,8 +239,8 @@
             if (elem.classList.contains('gmfc_files')) {
 
                 const id = elem.parentNode.id.replace('torrent', '');
-                const tEl = get('torrent');
-                const fEl = get('files');
+                const tEl = get('torrent', id);
+                const fEl = get('files', id);
                 const show = [tEl.className, fEl.className].join().indexOf('hidden') > -1;
 
                 tEl.classList[show ? 'remove' : 'add']('hidden');
@@ -249,7 +249,7 @@
                 if (show) {
                     const sections = ['peers', 'downloads', 'snatches', 'reported', 'logs'];
                     for (let i = sections.length; i--; ) {
-                        const el = get(sections[i]);
+                        const el = get(sections[i], id);
                         if (el) el.classList.add('hidden');
                     }
                 }
