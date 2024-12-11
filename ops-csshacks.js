@@ -3,7 +3,7 @@
 // @description     Collages below torrents, adds .tl_notice
 // @author          commoner@orpheus.network
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-11-01
+// @version         2024-12-11-03
 // @grant           none
 // @match           https://orpheus.network/torrents.php?id=*
 // @match           https://orpheus.network/artist.php?id=*
@@ -31,7 +31,12 @@
         .tl_notice {
             color: #d47744 !important;
             font-weight: 400;
-        }`;
+        }
+        .main_column .td_info a[href^="http"]:hover,
+        .main_column .td_info a[href^="https"]:hover {
+            background: none !important;
+        }
+        `;
     document.head.appendChild(tlNot);
 
 })();
