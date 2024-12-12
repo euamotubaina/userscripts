@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS/RED - add releases
 // @namespace       https://github.com/euamotubaina
-// @version         1.2.1-04
+// @version         1.2.1-05
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -443,7 +443,7 @@
     return decodedStr.trim().toLowerCase().replace(/['"]/g, "");
   }
 
-  if (isArtistPage) {
+/*  if (isArtistPage) {
     if (isOPS) {
       // Function to toggle the hidden class on dynamically added torrent rows
       function toggleHiddenForDynamicRows(groupId) {
@@ -489,7 +489,7 @@
         });
       }
     }
-  }
+  }*/
 
   function appendMatchHtml(torrentId, exactMatch) {
     const torrentRowId = `torrent${torrentId}`;
