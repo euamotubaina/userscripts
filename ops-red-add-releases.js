@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS/RED: Add releases
 // @namespace       https://github.com/euamotubaina
-// @version         1.2.1-05
+// @version         2024-12-12
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -389,8 +389,8 @@
       });
     });
 
-    const event = new CustomEvent("OPSaddREDreleasescomplete");
-    document.dispatchEvent(event);
+/*    const event = new CustomEvent("OPSaddREDreleasescomplete");
+    document.dispatchEvent(event);*/
     if (searchingHeader) {
       searchingHeader.remove();
     }
@@ -645,7 +645,7 @@
                 ${
                   !isOPS && isArtistPage
                     ? `&nbsp;&nbsp;${siteIcon} <a href="${torrentLink}" target="_blank">${details} ${leechLabel}</a>`
-                    : `<a href="${torrentLink}" target="_blank" style="background: none; padding: 0">${siteIcon} ${isOPS ? '[' : ''}${details}${isOPS ? ']' : ''} ${leechLabel}`
+                    : `<a href="${torrentLink}" target="_blank" style="background: none; padding: 0">${siteIcon} ${isOPS ? "[" : ""}${details}${isOPS ? "]" : ""} ${leechLabel}`
                 }
                 ${!isOPS ? " / " : ""}<strong class="torrent_label tooltip tl_notice">${siteName}</strong></a>
                 <span class="torrent_links_block" style="float: right;">
@@ -655,7 +655,7 @@
                     ${isArtistPage && !isOPS ? "" : " ]"}
                 </span>
             </td>
-            <td class="number_column td_filecount nobr ${showFileCount && !isArtistPage ? "" : "hidden"}">${torrent.fileCount}</td>
+            <td class="number_column td_filecount nobr ${!showFileCount || (!isOPS && isArtistPage) ? "hidden" : ""}">${torrent.fileCount}</td>
             <td class="number_column td_size nobr" style="${darkLines}">${sizeDisplay}</td>
             <td class="number_column m_td_right td_snatched" style="${darkLines}">${snatched}</td>
             <td class="number_column m_td_right td_seeders" style="${darkLines}">${seeders}</td>
