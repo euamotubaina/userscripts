@@ -2,9 +2,9 @@
 // @name            Gazelle File Count
 // @namespace       https://github.com/euamotubaina
 // @description     Shows the number of tracks and/or files in each torrent
-// @version         2.0.3-04
+// @version         2024-12-12
 // @match           https://notwhat.cd/torrents.php*id=*
-// @match           https://orpheus.network/torrents.php*id=*
+/* // @match           https://orpheus.network/torrents.php*id=* */
 // @match           https://redacted.sh/torrents.php*id=*
 // @grant           GM_getValue
 // @grant           GM_setValue
@@ -148,7 +148,6 @@
         extraSizeLimit = extraSizeLimit * 1048576;
 
         addStyle(
-            '.gmfc_files { cursor: pointer; }' +
             '.gmfc_extrasize { background-color: rgba(228, 169, 29, 0.12) !important; }'
         );
 
@@ -199,9 +198,9 @@
 
             const cell = rows[i].insertCell(1);
             cell.textContent = display < 2 ? numFiles : numTracks;
-            cell.className = 'gmfc_files';
+            cell.className = 'td_filecount';
             if (display != 3) {
-                cell.className += ' number_column';
+                cell.className = `number_column ${cell.className}`;
             } else {
                 const numExtras = numFiles - numTracks;
                 if (numExtras) {
@@ -219,7 +218,7 @@
             let sel = '';
             for (let ed in editions) {
                 if (editions.hasOwnProperty(ed) && editions[ed] < 1) {
-                    sel += [sel ? ',.' : '.', ed, '>.gmfc_files'].join('');
+                    sel += [sel ? ',.' : '.', ed, ' > .td_filecount'].join('');
                 }
             }
             if (sel) addStyle(sel + '{background-color: rgba(236, 17, 0, 0.09) !important;}');
@@ -227,14 +226,14 @@
 
         // Show filelist on filecount click
 
-        table.addEventListener('click', function (e) {
+        /*table.addEventListener('click', function (e) {
 
             function get(type, id) {
                 return document.getElementById([type, id].join('_'));
             }
 
             const elem = e.target.nodeName != 'SMALL' ? e.target : e.target.parentNode;
-            if (elem.classList.contains('gmfc_files')) {
+            if (elem.classList.contains('td_filecount')) {
 
                 const id = elem.parentNode.id.replace('torrent', '');
                 const tEl = get('torrent', id);
@@ -288,7 +287,7 @@
                 element.classList.remove('hidden');
             });
             //console.log("Finished processing RED_filecount_placeholder elements");
-        });
+        });*/
     }
 
     createSettingsMenu();
