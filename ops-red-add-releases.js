@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS/RED: Add releases
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-12
+// @version         2024-12-13
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -138,19 +138,16 @@
 
   // Function to extract artist name from the page header
   function extractArtistData() {
-    let artistLink = document.querySelector('.header h2 a[href*="artist.php?id="]');
-    let artistName;
+    let artistLink = document.getElementById('artist_list').querySelector(':is(.artist_main, .artists_main) a');
+    let artistName, artistId;
     if (artistLink) {
       artistName = artistLink.textContent.trim();
-    } else {
-      const artistNameElement = document.querySelector(".header h2");
-      artistName = artistNameElement ? artistNameElement.textContent : null;
+      artistId = artistLink.getAttribute('href').split('artist.php?id=')[1];
+      if (artistName) {
+        //console.log("Artist Name:", artistName);
+        return { artistName, artistId };
+      }
     }
-    if (artistName) {
-      //console.log("Artist Name:", artistName);
-      return { artistName };
-    }
-
     console.warn("Artist data not found.");
     return null;
   }
