@@ -138,11 +138,15 @@
 
   // Function to extract artist name from the page header
   function extractArtistData() {
-    let artistLink = document.getElementById('artist_list').querySelector(':is(.artist_main, .artists_main) a');
+    let artistLink = !isArtistPage
+      ? document.getElementById('artist_list').querySelector(':is(.artist_main, .artists_main) a')
+      : document.querySelector('.header h2');
     let artistName, artistId;
     if (artistLink) {
       artistName = artistLink.textContent.trim();
-      artistId = artistLink.getAttribute('href').split('artist.php?id=')[1];
+      artistId = !isArtistPage
+        ? artistLink.getAttribute('href').split('artist.php?id=')[1]
+        : window.location.href.split('artist.php?id=')[1];
       if (artistName) {
         //console.log("Artist Name:", artistName);
         return { artistName, artistId };
