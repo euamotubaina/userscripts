@@ -119,16 +119,14 @@
   }
 
   const isOPS = window.location.hostname.includes("orpheus.network");
-  //const sourceSiteUrl = isOPS ? "https://orpheus.network" : "https://redacted.sh";
-  //const targetSiteUrl = isOPS ? "https://redacted.sh" : "https://orpheus.network";
-
-  const opsApiUrl = "https://orpheus.network/ajax.php?action=artist&artistreleases=1&artistname=";
-  const redApiUrl = "https://redacted.sh/ajax.php?action=artist&artistreleases=1&artistname=";
-
-  //const sourceApiKey = isOPS ? GM_getValue("OPS_API_KEY") : GM_getValue("RED_API_KEY");
-  //const targetApiKey = isOPS ? GM_getValue("RED_API_KEY") : GM_getValue("OPS_API_KEY");
-  const OPS_API_KEY = GM_getValue("OPS_API_KEY");
-  const RED_API_KEY = GM_getValue("RED_API_KEY");
+  const trackerDomains = {
+    RED: "orpheus.network",
+    OPS: "redacted.sh"
+  };
+  const API_KEYS = {
+    OPS: GM_getValue("OPS_API_KEY"),
+    RED: GM_getValue("RED_API_KEY")
+  };
   const highLighting = GM_getValue("High_Lighting", false);
   const sizeMatching = GM_getValue("sizeMatching", 0);
   const showFileCount = GM_getValue("showFileCount", true);
@@ -236,29 +234,31 @@
     return null;
   };
 
-  // Function to send OPS API request with caching (now using artist ID)
-  const opsApiRequest = (artistName) => {
-    //console.log("Artist Name being used for OPS API:", artistName);
-    const cacheKey = `OPS_${artistName}`;
+  // Function to send OPS API request with caching
+  const opsApiRequest = (name, id = false) => {
+    const cacheKey = id ? `OPS_ID_${id}` : null;
     const cachedData = getCache(cacheKey);
 
     if (cachedData) {
       console.log("OPS API data from cache:", cachedData);
       return Promise.resolve(cachedData);
     }
+
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
-        url: `${opsApiUrl}${encodeURIComponent(artistName)}`,
+        url: `"https://${trackerDomains.OPS}/ajax.php?action=artist&artistreleases=1&"${
+          id ? `id=${id}` : `artistname=${encodeURIComponent(name)}`
+        }`,
         method: "GET",
         headers: {
-          Authorization: OPS_API_KEY,
+          Authorization: API_KEYS.OPS,
           "Content-Type": "application/json",
         },
         onload: (res) => {
           if (res.status === 200) {
             const responseJson = JSON.parse(res.responseText);
             console.log("OPS API response:", responseJson);
-            setCache(cacheKey, responseJson);
+            setCache(cacheKey ?? `OPS_ID_${responseJson.response.id}`, responseJson);
             resolve(responseJson);
           } else {
             reject(new Error(`OPS API Error: HTTP ${res.status}`));
@@ -271,36 +271,34 @@
     });
   };
 
-  // Function to send RED API request with caching (using artist name)
-  const redApiRequest = (artistName) => {
-    //console.log("Artist Name being used for RED API:", artistName);
-    const cacheKey = `RED_${artistName}`;
+  // Function to send RED API request with caching
+  const redApiRequest = (name, id = false) => {
+    const cacheKey = id ? `RED_ID_${id}` : null;
     const cachedData = getCache(cacheKey);
 
     if (cachedData) {
       console.log("RED API data from cache:", cachedData);
       return Promise.resolve(cachedData);
     }
-    //console.log(`RED API URL: ${redApiUrl}${encodeURIComponent(artistName)}`);
+
     return new Promise((resolve, reject) => {
       GM_xmlhttpRequest({
-        url: `${redApiUrl}${encodeURIComponent(artistName)}`,
+        url: `"https://${trackerDomains.RED}/ajax.php?action=artist&artistreleases=1&"${
+          id ? `id=${id}` : `artistname=${encodeURIComponent(name)}`
+        }`,
         method: "GET",
         headers: {
-          Authorization: RED_API_KEY,
+          Authorization: API_KEYS.RED,
           "Content-Type": "application/json",
         },
         onload: (res) => {
           if (res.status === 200) {
             const responseJson = JSON.parse(res.responseText);
             console.log("RED API response:", responseJson);
-            setCache(cacheKey, responseJson);
+            setCache(cacheKey ?? `RED_ID_${responseJson.response.id}`, responseJson);
             resolve(responseJson);
           } else {
             reject(new Error(`RED API Error: HTTP ${res.status}`));
-            if (searchingHeader) {
-              searchingHeader.remove();
-            }
           }
         },
         onerror: (err) => {
@@ -409,25 +407,39 @@
   const artistData = extractArtistData();
   if (artistData) {
     if (isOPS) {
-      opsApiRequest(artistData.artistName)
-        .then((opsResponse) => {
-          return redApiRequest(artistData.artistName).then((redResponse) => {
-            findMatchingTorrent(opsResponse, redResponse); // Match from OPS to RED
-          });
-        })
-        .catch((error) => {
+      (async () => {
+        try {
+          const opsResponse = await opsApiRequest(artistData.artistName, artistData.artistId);
+          const opsNameToIds = JSON.parse(GM_getValue("OPS_NAME_IDS", "{}"));
+          opsNameToIds[opsResponse.response.name] ??= opsResponse.response.id;
+          const redNameToIds = JSON.parse(GM_getValue("RED_NAME_IDS", "{}"));
+          const redResponse = await redApiRequest(opsResponse.response.name, redNameToIds[opsResponse.response.name]);
+          redNameToIds[redResponse.response.name] = redResponse.response.id;
+          GM_setValue("RED_NAME_IDS", JSON.stringify(redNameToIds));
+          GM_setValue("OPS_NAME_IDS", JSON.stringify(opsNameToIds));
+          findMatchingTorrent(opsResponse, redResponse);
+        } catch (error) {
           console.error("API request error:", error);
-        });
+          if (searchingHeader) searchingHeader.remove();
+        }
+      })();
     } else {
-      redApiRequest(artistData.artistName)
-        .then((redResponse) => {
-          return opsApiRequest(artistData.artistName).then((opsResponse) => {
-            findMatchingTorrent(redResponse, opsResponse); // Match from RED to OPS
-          });
-        })
-        .catch((error) => {
+      (async () => {
+        try {
+          const redResponse = await redApiRequest(artistData.artistName, artistData.artistId);
+          const redNameToIds = JSON.parse(GM_getValue("RED_NAME_IDS", "{}"));
+          redNameToIds[redResponse.response.name] ??= redResponse.response.id;
+          const opsNameToIds = JSON.parse(GM_getValue("OPS_NAME_IDS", "{}"));
+          const opsResponse = await opsApiRequest(redResponse.response.name, opsNameToIds[redResponse.response.name]);
+          opsNameToIds[opsResponse.response.name] = opsResponse.response.id;
+          GM_setValue("OPS_NAME_IDS", JSON.stringify(opsNameToIds));
+          GM_setValue("RED_NAME_IDS", JSON.stringify(redNameToIds));
+          findMatchingTorrent(redResponse, opsResponse);
+        } catch (error) {
           console.error("API request error:", error);
-        });
+          if (searchingHeader) searchingHeader.remove();
+        }
+      })();
     }
   } else {
     console.error("No artist data found on the page.");
@@ -663,18 +675,18 @@
             <td class="number_column m_td_right td_leechers" style="${darkLines}">${leechers}</td>`;
   }
 
-  document.addEventListener("click", event => {
-    if (event.target.classList.contains("dl-link")) {
+  document.querySelectorAll("a.dl-link")?.forEach(dlEl => {
+    dlEl.addEventListener("click", event => {
       event.preventDefault();
       const torrentId = event.target.getAttribute("data-id");
       let downloadUrl;
       let api_key;
       if (!isOPS) {
         downloadUrl = `https://orpheus.network/ajax.php?action=download&id=${torrentId}`;
-        api_key = OPS_API_KEY;
+        api_key = API_KEYS.OPS;
       } else {
         downloadUrl = `https://redacted.sh/ajax.php?action=download&id=${torrentId}`;
-        api_key = RED_API_KEY;
+        api_key = API_KEYS.RED;
       }
 
       GM_xmlhttpRequest({
@@ -702,7 +714,7 @@
           console.error("Error during download request:", err);
         },
       });
-    }
+    });
   });
 
   createSettingsMenu();
