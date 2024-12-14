@@ -460,9 +460,6 @@
         matchRow.style.background = highLightColour;
       }
       matchRow.style.fontWeight = "normal";
-      if (!isOPS && !isArtistPage && highLighting) {
-        matchRow.style.fontSize = "0.91em";
-      }
       matchRow.innerHTML = matchHtml;
 
       if (isArtistPage) {
