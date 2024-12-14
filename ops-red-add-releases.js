@@ -38,11 +38,17 @@
         default: GM_getValue("RED_API_KEY", ""),
         title: "Enter your RED API Key",
       },
-      High_Lighting: {
+      highLighting: {
         label: "Add highlighting to the added rows",
         type: "checkbox",
-        default: GM_getValue("High_Lighting", false),
+        default: GM_getValue("highLighting", false),
         title: "Add or not",
+      },
+      highLightColour: {
+        label: "Specify highlight colour",
+        type: "text",
+        default: GM_getValue("highLightColour", "hsl(175deg 20 40% / 0.25)"),
+        title: "Set highlight row using <color> CSS data type. Default: hsl(175deg 20 40% / 0.25)",
       },
       sizeMatching: {
         label: "Size Tolerance (in MiB)",
@@ -121,15 +127,10 @@
   const isOPS = window.location.hostname.includes("orpheus.network");
   const sourceTracker = isOPS ? "OPS" : "RED";
   const targetTracker = !isOPS ? "OPS" : "RED";
-  const trackerDomains = {
-    RED: "orpheus.network",
-    OPS: "redacted.sh"
-  };
-  const API_KEYS = {
-    OPS: GM_getValue("OPS_API_KEY"),
-    RED: GM_getValue("RED_API_KEY")
-  };
-  const highLighting = GM_getValue("High_Lighting", false);
+  const trackerDomains = { OPS: "redacted.sh", RED: "orpheus.network" };
+  const API_KEYS = { OPS: GM_getValue("OPS_API_KEY"), RED: GM_getValue("RED_API_KEY") };
+  const highLighting = GM_getValue("highLighting", false);
+  const highLightColour = GM_getValue("highLightColour", "hsl(175deg 20 40% / 0.25)");
   const sizeMatching = GM_getValue("sizeMatching", 0);
   const showFileCount = GM_getValue("showFileCount", true);
   const CACHE_EXPIRY_DAYS = GM_getValue("CACHE_EXPIRY_TIME", 14);
@@ -456,7 +457,7 @@
         "exact_match_row",
       );
       if (highLighting) {
-        matchRow.style.background = "hsl(175deg 20 40% / 0.25)";
+        matchRow.style.background = highLightColour;
       }
       matchRow.style.fontWeight = "normal";
       if (!isOPS && !isArtistPage && highLighting) {
