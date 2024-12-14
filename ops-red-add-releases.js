@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS/RED: Add releases
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-14+02
+// @version         2024-12-14+03
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -127,7 +127,7 @@
   const isOPS = window.location.hostname.includes("orpheus.network");
   const sourceTracker = isOPS ? "OPS" : "RED";
   const targetTracker = !isOPS ? "OPS" : "RED";
-  const trackerDomains = { OPS: "redacted.sh", RED: "orpheus.network" };
+  const trackerDomains = { OPS: "orpheus.network", RED: "redacted.sh" };
   const API_KEYS = { OPS: GM_getValue("OPS_API_KEY"), RED: GM_getValue("RED_API_KEY") };
   const highLighting = GM_getValue("highLighting", false);
   const highLightColour = GM_getValue("highLightColour", "hsl(175deg 20 40% / 0.25)");
