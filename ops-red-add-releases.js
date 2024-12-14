@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS/RED: Add releases
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-14
+// @version         2024-12-14+02
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -79,7 +79,7 @@
             background: #333;
             color: #fff;
             padding: 20px;
-            width: 400px;
+            width: 800px;
             max-width: 90%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -90,7 +90,7 @@
         }
         #APIConfig .field_label {
             color: #fff;
-            width: 90%;
+            width: 35%;
         }
         #APIConfig .config_header {
             color: #fff;
@@ -102,7 +102,7 @@
             padding: 8px 0;
         }
         #APIConfig .config_var input {
-            width: 60%;
+            width: 100%;
             padding: 4px;
         }
             `,
