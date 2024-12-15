@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name            OPS/RED: Fix PL
+// @name            OPS-RED: Fix PL
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-11-02
+// @version         2024-12-15
 // @description     Fix PL links
 // @author          euamotubaina
 // @grant           none

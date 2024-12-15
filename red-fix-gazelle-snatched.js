@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name            Redacted: Fix Gazelle Snatched
+// @name            RED: Fix Gazelle Snatched
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-11-01
+// @version         2024-12-15
 // @description     Fix Gazelle Snatched
 // @author          euamotubaina
 // @grant           none

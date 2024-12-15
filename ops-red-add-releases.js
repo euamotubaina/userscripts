@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name            OPS/RED: Add releases
+// @name            OPS-RED: Add releases
 // @namespace       https://github.com/euamotubaina
-// @version         2024-12-14+03
+// @version         2024-12-15
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
