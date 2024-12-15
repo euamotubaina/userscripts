@@ -111,7 +111,7 @@
   document.querySelectorAll('a.button_sz').forEach(a => {
     a.addEventListener('click', async evt => {
       evt.preventDefault();
-      
+
       const torRowEl = document.getElementById(`torrent${evt.target.dataset.id}`)
       const filesEl = document.getElementById(`files_${evt.currentTarget.dataset.id}`);
       if (filesEl.classList.contains('hidden')) {
@@ -120,7 +120,7 @@
           .querySelector('a[onclick^="show_files"], a.view-filelist')
           .click();
       }
-      
+
       const res = await getApi(evt.target.dataset.id);
       const filesData = {
         fileList: res.response.torrent.fileList.split('|||').map(f => {
@@ -139,7 +139,7 @@
       } else {
         parseFilesData(torRowEl, filesEl, filesData);
       }
-      
+
     });
   });
 
