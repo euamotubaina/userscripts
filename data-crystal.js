@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            Data Crystal monospace
-// @namespace       https://github.com/euamotubaina
-// @version         2024-12-12
+// @namespace       github.com/euamotubaina
+// @version         2024-12-15
 // @description     Upgrade monospace font
 // @author          euamotubaina
 // @match           https://datacrystal.tcrf.net/*

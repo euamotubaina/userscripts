@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name            Gazelle Snatched
-// @namespace       https://github.com/euamotubaina
+// @namespace       github.com/euamotubaina
 // @description     Mark snatched torrents across your favorite gazelle music trackers.
+// @version         2024-12-15
 // @author          Mordred
 // @match           https://*redacted.sh/*
 // @match           https://*orpheus.network/*
@@ -12,7 +13,6 @@
 // @grant           GM_getResourceText
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle-snatched.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/gazelle-snatched.js
-// @version         2024-12-11
 // ==/UserScript==
 
 var snatched_groups = {};

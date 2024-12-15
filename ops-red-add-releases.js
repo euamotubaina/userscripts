@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            OPS-RED: Add releases
-// @namespace       https://github.com/euamotubaina
+// @namespace       github.com/euamotubaina
 // @version         2024-12-15
 // @description     Add releases to/from RED/OPS
 // @author          Audionut

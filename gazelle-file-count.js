@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name            Gazelle File Count
-// @namespace       https://github.com/euamotubaina
+// @namespace       github.com/euamotubaina
 // @description     Shows the number of tracks and/or files in each torrent
-// @version         2024-12-14
+// @version         2024-12-15
 // @match           https://redacted.sh/torrents.php*id=*
 // @grant           GM_getValue
 // @grant           GM_setValue

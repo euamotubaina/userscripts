@@ -2,7 +2,7 @@
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
 // @version       2024-12-15
-// @namespace     https://github.com/euamotubaina
+// @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
 // @match         https://orpheus.network/torrents.php?id=*

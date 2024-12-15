@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            OPS-RED: Fix PL
-// @namespace       https://github.com/euamotubaina
+// @namespace       github.com/euamotubaina
 // @version         2024-12-15
 // @description     Fix PL links
 // @author          euamotubaina

@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name            Orpheus: CSS Hacks
+// @name            OPS: CSS Hacks
 // @description     Collages below torrents, adds .tl_notice
 // @author          commoner@orpheus.network
-// @namespace       https://github.com/euamotubaina
-// @version         2024-12-11-03
+// @namespace       github.com/euamotubaina
+// @version         2024-12-15
 // @grant           none
 // @match           https://orpheus.network/torrents.php?id=*
 // @match           https://orpheus.network/artist.php?id=*
