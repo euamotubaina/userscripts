@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
-// @version       2024-12-15
+// @version       2024-12-16
 // @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
@@ -42,7 +42,7 @@
     };
 
     if (!cacheData) {
-      const data = await((await fetch(apiURL + torrentId)).json())
+      const data = await ((await fetch(apiURL + torrentId)).json())
       if (!data) {
         throw new Error("Something went wrong with the API");
       }
