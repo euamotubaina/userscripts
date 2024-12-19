@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name            RED: Fix Gazelle Snatched
 // @namespace       github.com/euamotubaina
-// @version         2024-12-15
+// @version         2024-12-19
 // @description     Fix Gazelle Snatched
 // @author          euamotubaina
 // @grant           none
 // @match           https://redacted.sh/torrents.php?id=*
 // @match           https://redacted.sh/torrents.php?searchstr=*
 // @match           https://redacted.sh/artist.php?id=*
+// @match           https://redacted.sh/collages.php?id=*
 // @icon            https://redacted.sh/favicon.ico
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/red-fix-gazelle-snatched.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/red-fix-gazelle-snatched.js

@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name            OPS-RED: Fix PL
 // @namespace       github.com/euamotubaina
-// @version         2024-12-15
+// @version         2024-12-19
 // @description     Fix PL links
 // @author          euamotubaina
 // @grant           none
 // @match           https://orpheus.network/torrents.php?id=*
 // @match           https://orpheus.network/artist.php?id=*
+// @match           https://orpheus.network/collages.php?id=*
 // @match           https://redacted.sh/torrents.php?id=*
 // @match           https://redacted.sh/artist.php?id=*
+// @match           https://redacted.sh/collages.php?id=*
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-fix-pl.js
 // ==/UserScript==

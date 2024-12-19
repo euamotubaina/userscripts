@@ -3,10 +3,11 @@
 // @description     Collages below torrents, adds .tl_notice
 // @author          commoner@orpheus.network
 // @namespace       github.com/euamotubaina
-// @version         2024-12-15
+// @version         2024-12-19
 // @grant           none
 // @match           https://orpheus.network/torrents.php?id=*
 // @match           https://orpheus.network/artist.php?id=*
+// @match           https://orpheus.network/collages.php?id=*
 // @downloadURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-csshacks.js
 // @updateURL       https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-csshacks.js
 // @icon            https://orpheus.network/favicon.ico
