@@ -119,7 +119,7 @@
       },
     });
 
-    GM_registerMenuCommand("Configure API & Cache Settings", () => {
+    GM_registerMenuCommand("Configure", () => {
       GM_config.open();
     });
   }
@@ -177,23 +177,9 @@
     alert("Cache has been flushed, except API keys.");
   }
 
-  // Create the "Flush Cache" link
-  const flushLink = document.createElement("a");
-  flushLink.textContent = "Flush Cache";
-  flushLink.href = "#";
-  flushLink.style.marginLeft = "10px";
-  flushLink.onclick = (e) => {
-    e.preventDefault();
+  GM_registerMenuCommand("Flush cache", () => {
     flushCache();
-  };
-
-  // Append the link to div.linkbox
-  const linkboxDiv = document.querySelector("div.linkbox");
-  if (linkboxDiv) {
-    linkboxDiv.appendChild(flushLink);
-  } else {
-    console.warn("linkbox div not found, cannot append cache flush link.");
-  }
+  });
 
   // Add the h2 text as the first child of <div id="SnatchData">
   const snatchDataDiv = document.querySelector(".header");
