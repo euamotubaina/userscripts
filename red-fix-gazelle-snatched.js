@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            RED: Fix Gazelle Snatched
 // @namespace       github.com/euamotubaina
-// @version         2024-12-19_01
+// @version         2024-12-19_02
 // @description     Fix Gazelle Snatched
 // @author          euamotubaina
 // @grant           none
@@ -23,6 +23,8 @@
         gtLinks.style.color = gtLinks.style.color;
         // make link separators in torrent_actions_buttons visible
         const taSep = [...sSheet.cssRules].find(rule => rule.selectorText == '.group_torrent td:first-of-type span');
-        taSep?.style.visibility = '';
+        if (taSep) {
+            taSep.style.visibility = '';
+        }
     }
 })();
