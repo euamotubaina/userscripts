@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS-RED: Add releases
 // @namespace       github.com/euamotubaina
-// @version         2024-12-15
+// @version         2024-12-19
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -246,12 +246,12 @@
     }
 
     const res = await GM.xmlHttpRequest({
-      url: `"https://${trackerDomains[tracker]}/ajax.php?action=artist&artistreleases=1&"${
+      url: `https://${trackerDomains[tracker]}/ajax.php?action=artist&artistreleases=1&${
         id ? `id=${id}` : `artistname=${encodeURIComponent(name)}`
       }`,
       method: "GET",
       headers: {
-        Authorization: API_KEYS[tracker],
+        "Authorization": API_KEYS[tracker],
         "Content-Type": "application/json",
       }
     });
