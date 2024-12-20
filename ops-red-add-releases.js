@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS-RED: Add releases
 // @namespace       github.com/euamotubaina
-// @version         2024-12-20
+// @version         2024-12-20_01
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -534,7 +534,7 @@
           ${isArtistPage && !isOPS ? "" : " ]"}
         </span>
       </td>
-      <td class="number_column td_filecount nobr${!showFileCount || (!isOPS && isArtistPage) ? "hidden" : ""}">${torrent.fileCount}</td>
+      <td class="number_column td_filecount nobr${!showFileCount || (!isOPS && isArtistPage) ? " hidden" : ""}">${torrent.fileCount}</td>
       <td class="number_column td_totalexactsize nobr hidden${darklines ? " darklines" : ""}">${size.toLocaleString()}</td>
       <td class="number_column td_size nobr${darklines ? " darklines" : ""}">${sizeDisplay}</td>
       <td class="number_column m_td_right td_snatched${darklines ? " darklines" : ""}">${snatched}</td>
