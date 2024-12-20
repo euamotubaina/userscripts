@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
-// @version       2024-12-16
+// @version       2024-12-20
 // @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
@@ -10,6 +10,7 @@
 // @grant         GM_getValue
 // @grant         GM_setValue
 // @grant         GM_deleteValue
+// @grant         GM_listValues
 // @require       https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js
 // @downloadURL   https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-exact-filesizes.js
 // @updateURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-exact-filesizes.js
@@ -23,6 +24,16 @@
   const apiURL = `https://${url.hostname}/ajax.php?action=torrent&id=`;
   const CACHE_EXPIRY_DAYS = GM_getValue("CACHE_EXPIRY_TIME", 7);
   const CACHE_EXPIRY_TIME = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+
+  function flushCache() {
+    const keys = GM_listValues();
+    keys.forEach(key => GM_deleteValue(key));
+    alert("Cache has been flushed.");
+  }
+
+  GM_registerMenuCommand("Flush cache", () => {
+    flushCache();
+  });
 
   async function getApi(torrentId) {
     let cacheData;
@@ -57,20 +68,29 @@
     return cacheData.data;
   };
 
+  function normalizeName(name) {
+    return new DOMParser().parseFromString(name, 'text/html').querySelector('html').textContent;
+  };
+
   function parseFilesData(torRowEl, filesEl, filesData) {
     let totalSZ = torRowEl.querySelector('.td_totalexactsize');
-    let totalSizeEl = torRowEl.querySelector(':scope > td.td_size, :scope > td.nobr:not(.td_filecount, .td_totalexactsize)');
+    const totalSizeEl = torRowEl.querySelector(':scope > td.td_size, :scope > td.nobr:not(.td_filecount, .td_totalexactsize)');
+    const matchRowEl = document.getElementById(`${torRowEl.id}_match`);
+    const matchTotalSZ = matchRowEl.querySelector('.td_totalexactsize');
+    const matchTotalSizeEl = matchRowEl.querySelector('.td_size');
     if (!totalSZ) {
       totalSZ = totalSizeEl.cloneNode();
       totalSZ.classList.add('td_totalexactsize');
       totalSZ.classList.remove('td_size');
       totalSZ.textContent = filesData.totalSize.toLocaleString();
-      totalSizeEl.classList.add('hidden');
       torRowEl.insertBefore(totalSZ, totalSizeEl);
     } else {
       totalSZ.classList.toggle('hidden');
-      totalSizeEl.classList.toggle('hidden');
     }
+
+    matchTotalSZ.classList.toggle('hidden');
+    matchTotalSizeEl.classList.toggle('hidden');
+    totalSizeEl.classList.toggle('hidden');
 
     filesEl.querySelectorAll('tr:not(.colhead_dark)').forEach((tr, i) => {
       const fileData = filesData.fileList[i];
@@ -125,7 +145,7 @@
       const filesData = {
         fileList: res.response.torrent.fileList.split('|||').map(f => {
           const s = f.split(/{{3}|}{3}/);
-          return {name: s[0], size: parseInt(s[1])};
+          return {name: normalizeName(s[0]), size: parseInt(s[1])};
         }),
         get totalSize() {
           return this.fileList.reduce((acc, cv) => acc + cv.size, 0);
