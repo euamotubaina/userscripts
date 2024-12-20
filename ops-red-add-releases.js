@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS-RED: Add releases
 // @namespace       github.com/euamotubaina
-// @version         2024-12-19
+// @version         2024-12-20
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -159,17 +159,11 @@
 
   function flushCache() {
     const keys = GM_listValues();
-    keys.forEach((key) => {
+    keys.forEach(key => {
       // Delete keys except OPS_API_KEY and RED_API_KEY
       if (
-        (key.startsWith("CACHE_") ||
-          key.startsWith("OPS_") ||
-          key.startsWith("RED_") ||
-          key.startsWith("TARGET_") ||
-          key.startsWith("SOURCE_") ||
-          key.startsWith("https")) &&
-        key !== "OPS_API_KEY" &&
-        key !== "RED_API_KEY"
+        (key.startsWith("OPS_ID_") || key.startsWith("RED_ID_"))
+        && !["OPS_API_KEY", "RED_API_KEY"].includes(key)
       ) {
         GM_deleteValue(key);
       }
@@ -343,6 +337,16 @@
 
     if (searchingHeader) searchingHeader.remove();
     if (exactMatches.length > 0 || toleranceMatches.length > 0) {
+      const highlightStyle = document.createElement('style');
+      highlightStyle.textContent = `
+.torrent_row.exact_match_row.highlight {
+    background: ${highLightColour} !important;
+}
+.torrent_row.exact_match_row.darklines {
+    text-align: right;
+    padding-right: 15px !important;
+}`;
+      document.head.appendChild(highlightStyle);
       return { exactMatches, toleranceMatches };
     }
 
@@ -442,10 +446,7 @@
         "group_torrent",
         "exact_match_row",
       );
-      if (highLighting) {
-        matchRow.style.background = highLightColour;
-      }
-      matchRow.style.fontWeight = "normal";
+      if (highLighting) matchRow.classList.toggle("highlight");
       matchRow.innerHTML = matchHtml;
 
       if (isArtistPage) {
@@ -520,10 +521,7 @@
       ? '<strong class="torrent_label tooltip tl_neutral" title="Neutral Leech!" style="white-space: nowrap;">Neutral Leech!</strong>'
       : "";
 
-    let darkLines = "";
-    if (highLighting) {
-      darkLines = !isOPS ? "text-align: right; padding-right: 15px !important;" : "";
-    }
+    let darklines = highLighting && !isOPS ? true : false;
 
     return `<td class="td_info" colspan=${colspanValue}>${!isOPS && isArtistPage
         ? `&nbsp;&nbsp;${siteIcon} <a href="${torrentLink}" target="_blank">${details} ${leechLabel}</a>`
@@ -536,11 +534,12 @@
           ${isArtistPage && !isOPS ? "" : " ]"}
         </span>
       </td>
-      <td class="number_column td_filecount nobr ${!showFileCount || (!isOPS && isArtistPage) ? "hidden" : ""}">${torrent.fileCount}</td>
-      <td class="number_column td_size nobr" style="${darkLines}">${sizeDisplay}</td>
-      <td class="number_column m_td_right td_snatched" style="${darkLines}">${snatched}</td>
-      <td class="number_column m_td_right td_seeders" style="${darkLines}">${seeders}</td>
-      <td class="number_column m_td_right td_leechers" style="${darkLines}">${leechers}</td>`;
+      <td class="number_column td_filecount nobr${!showFileCount || (!isOPS && isArtistPage) ? "hidden" : ""}">${torrent.fileCount}</td>
+      <td class="number_column td_totalexactsize nobr hidden${darklines ? " darklines" : ""}">${size.toLocaleString()}</td>
+      <td class="number_column td_size nobr${darklines ? " darklines" : ""}">${sizeDisplay}</td>
+      <td class="number_column m_td_right td_snatched${darklines ? " darklines" : ""}">${snatched}</td>
+      <td class="number_column m_td_right td_seeders${darklines ? " darklines" : ""}">${seeders}</td>
+      <td class="number_column m_td_right td_leechers${darklines ? " darklines" : ""}">${leechers}</td>`;
   }
 
   document.querySelectorAll("a.dl-link")?.forEach(dlEl => {
