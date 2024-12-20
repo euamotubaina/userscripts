@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
-// @version       2024-12-20_01
+// @version       2024-12-20_02
 // @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
@@ -20,7 +20,8 @@
 (function() {
   'use strict';
 
-  const isOps = new URL(location).hostname === 'orpheus.network';
+  const url = new URL(location);
+  const isOps = url.hostname === 'orpheus.network';
   const apiURL = `https://${url.hostname}/ajax.php?action=torrent&id=`;
   const CACHE_EXPIRY_DAYS = GM_getValue("CACHE_EXPIRY_TIME", 7);
   const CACHE_EXPIRY_TIME = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
