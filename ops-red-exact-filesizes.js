@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
-// @version       2024-12-20_02
+// @version       2024-12-20_03
 // @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
@@ -76,9 +76,6 @@
   function parseFilesData(torRowEl, filesEl, filesData) {
     let totalSZ = torRowEl.querySelector('.td_totalexactsize');
     const totalSizeEl = torRowEl.querySelector(':scope > td.td_size, :scope > td.nobr:not(.td_filecount, .td_totalexactsize)');
-    const matchRowEl = document.getElementById(`${torRowEl.id}_match`);
-    const matchTotalSZ = matchRowEl.querySelector('.td_totalexactsize');
-    const matchTotalSizeEl = matchRowEl.querySelector('.td_size');
     if (!totalSZ) {
       totalSZ = totalSizeEl.cloneNode();
       totalSZ.classList.add('td_totalexactsize');
@@ -89,9 +86,15 @@
       totalSZ.classList.toggle('hidden');
     }
 
-    matchTotalSZ.classList.toggle('hidden');
-    matchTotalSizeEl.classList.toggle('hidden');
     totalSizeEl.classList.toggle('hidden');
+
+    const matchRowEl = document.getElementById(`${torRowEl.id}_match`);
+    if (matchRowEl) {
+      const matchTotalSZ = matchRowEl.querySelector('.td_totalexactsize');
+      const matchTotalSizeEl = matchRowEl.querySelector('.td_size');
+      matchTotalSZ.classList.toggle('hidden');
+      matchTotalSizeEl.classList.toggle('hidden');
+    }
 
     filesEl.querySelectorAll('tr:not(.colhead_dark)').forEach((tr, i) => {
       const fileData = filesData.fileList[i];
