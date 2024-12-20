@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          OPS-RED: Exact filesizes
 // @description   Get exact size of files. Click [SZ] next to [PL]
-// @version       2024-12-20
+// @version       2024-12-20_01
 // @namespace     github.com/euamotubaina
 // @author        userscript1
 // @match         https://redacted.sh/torrents.php?id=*
@@ -11,6 +11,7 @@
 // @grant         GM_setValue
 // @grant         GM_deleteValue
 // @grant         GM_listValues
+// @grant         GM_registerMenuCommand
 // @require       https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js
 // @downloadURL   https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-exact-filesizes.js
 // @updateURL     https://raw.githubusercontent.com/euamotubaina/userscripts/main/ops-red-exact-filesizes.js
@@ -19,8 +20,7 @@
 (function() {
   'use strict';
 
-  const url = new URL(location);
-  const isOps = url.hostname === 'orpheus.network';
+  const isOps = new URL(location).hostname === 'orpheus.network';
   const apiURL = `https://${url.hostname}/ajax.php?action=torrent&id=`;
   const CACHE_EXPIRY_DAYS = GM_getValue("CACHE_EXPIRY_TIME", 7);
   const CACHE_EXPIRY_TIME = CACHE_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
