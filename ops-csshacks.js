@@ -3,7 +3,7 @@
 // @description     Collages below torrents, adds .tl_notice
 // @author          euamotubaina
 // @namespace       github.com/euamotubaina
-// @version         2024-12-20
+// @version         2024-12-20_01
 // @grant           none
 // @match           https://orpheus.network/torrents.php*
 // @match           https://orpheus.network/artist.php?id=*
@@ -39,7 +39,7 @@
 .main_column .td_info a[href^="https"]:hover {
     background: none !important;
 }
-#torrent_details tr.edition {
+.torrent_table tr.edition {
     background-color: transparent;
 }`;
     document.head.appendChild(tlNot);
