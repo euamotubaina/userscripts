@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name            OPS-RED: Add releases
 // @namespace       github.com/euamotubaina
-// @version         2024-12-20_02
+// @version         2024-12-21
 // @description     Add releases to/from RED/OPS
 // @author          Audionut
 // @match           https://orpheus.network/torrents.php?id=*
@@ -508,7 +508,7 @@
     if (logScore) details += ` / Log (${logScore}%)`;
     if (hasCue) details += ` / Cue`;
     if (remasterRecordLabelAppended) details += ` / ${remasterRecordLabelAppended}`;
-    if (fileCountAppended) details += ` / ${fileCountAppended}`;
+    // if (fileCountAppended) details += ` / ${fileCountAppended}`;
     if (sizeToleranceAppended) details += ` / ${sizeToleranceAppended}`;
 
     const colspanValue = isArtistPage ? 2 : 1;
